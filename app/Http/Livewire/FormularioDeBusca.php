@@ -14,6 +14,8 @@ class FormularioDeBusca extends Component
     public $busca;
     public $exibirCabecalhoResposta;
     public $favoritos;
+    public $mensagem_erro;
+    public $mensagem_sucesso;
 
     protected $listeners = ['addFav'];
 
@@ -23,6 +25,8 @@ class FormularioDeBusca extends Component
         $this->lista = [];
         $this->busca = "";
         $this->exibirCabecalhoResposta = false;
+        $this->mensagem_erro = null;
+        $this->mensagem_sucesso = null;
         $this->favoritos = ($session->has("favoritos"))
                 ?$session->get("favoritos")
                 :[];
@@ -70,9 +74,25 @@ class FormularioDeBusca extends Component
 
     public function addFav(SessionManager $session, $id)
     {
-        $dados = Spotify::artist($id)->get();
-        $this->favoritos[] = $dados;
-        $session->put("favoritos", $this->favoritos);
+        $this->mensagem_sucesso = null;
+        $this->mensagem_erro = null;
         
+        foreach($this->favoritos as $fav)
+        {
+            if($fav["id"] == $id){
+                $this->mensagem_erro = "Artista já é um de seus favoritos";
+                break;
+            }
+        } 
+
+        if(is_null($this->mensagem_erro))
+        {
+            $dados = Spotify::artist($id)->get();
+            $this->favoritos[] = $dados;
+            $session->put("favoritos", $this->favoritos);
+            $this->mensagem_sucesso = "Favorito Adicionado com Sucesso";
+
+        }
+
     }
 }

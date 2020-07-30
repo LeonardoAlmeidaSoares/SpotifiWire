@@ -31,7 +31,17 @@
         <div class="container text-center" wire:loading="true">
             <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/35771931234507.564a1d2403b3a.gif">
         </div>
-        
+
+        @if(! is_null($mensagem_erro))
+            <div class="alert alert-danger" role="alert">
+                {{ $mensagem_erro }}
+            </div>
+        @endif
+        @if(! is_null($mensagem_sucesso))
+            <div class="alert alert-success" role="alert">
+                {{ $mensagem_sucesso }}
+            </div>
+        @endif
         <div class="row" wire:loading.remove>
             @if($exibirCabecalhoResposta)
                 <h6 class="border-bottom border-gray pb-2 mb-0">Resultados da Busca</h6>
