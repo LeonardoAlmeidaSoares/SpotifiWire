@@ -1,0 +1,14 @@
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+.blog-header-logo {
+  font-size: 80px;
+}
+
+footer {
+  max-height: 50px;
+  background-color: #333;
+}
+

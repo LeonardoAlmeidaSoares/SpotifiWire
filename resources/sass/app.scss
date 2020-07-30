@@ -1,0 +1,16 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+.blog-header-logo{
+  font-size: 80px;
+}
+
+footer{
+  max-height: 50px;
+  background-color: $primary-color;
+}
